@@ -34,16 +34,6 @@ class ScanFragment:Fragment() {
 
 
 
-
-
-
-
-
-
-
-
-
-
         return binding.root
     }
 }

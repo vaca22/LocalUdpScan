@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
         val gatew = wifiManager.dhcpInfo.gateway
         val bb = wifiManager.dhcpInfo.ipAddress
         myIp = intToIp(bb)
-        Log.e("gugu", bbx)
         gate = intToIp(gatew)
         gatep = intToIp3(gatew)
         gateX = intToIp2(gatew)

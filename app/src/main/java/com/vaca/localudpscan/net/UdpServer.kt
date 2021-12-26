@@ -3,6 +3,7 @@ package com.vaca.localudpscan.net
 import android.util.Log
 import com.vaca.localudpscan.MainActivity
 import com.vaca.localudpscan.net.NetSetting.gate
+import com.vaca.localudpscan.net.NetSetting.myIp
 import com.vaca.localudpscan.net.NetUtils.bytebuffer2ByteArray
 import com.vaca.localudpscan.net.NetUtils.fillString
 import kotlinx.coroutines.delay
@@ -78,8 +79,9 @@ object UdpServer {
     suspend fun broadCastMe(){
         for(k in 1..30){
             val fuck=NetSetting.gateX+ fillString(k,2)
-            send2Destination("fuck me",fuck, localPort)
-            delay(10)
+            if(fuck!=myIp){
+                send2Destination("fuck me",fuck, localPort)
+            }
         }
     }
 
