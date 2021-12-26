@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.vaca.localudpscan.databinding.FragmentScanBinding
+import com.vaca.localudpscan.net.NetUtils
+import com.vaca.localudpscan.net.UdpServer
+import kotlinx.coroutines.launch
 
 class ScanFragment:Fragment() {
     lateinit var binding:FragmentScanBinding
@@ -15,6 +18,32 @@ class ScanFragment:Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding= FragmentScanBinding.inflate(inflater,container,false)
+
+
+
+
+        binding.fuck.setOnClickListener {
+            NetUtils.dataScope.launch {
+                UdpServer.broadCastMe()
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         return binding.root
     }
 }
