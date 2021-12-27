@@ -80,7 +80,7 @@ object UdpServer {
     }
 
     suspend fun broadCastMe(){
-        for(k in 0..255){
+        for(k in 1..254){
             val fuck=NetSetting.gateX+ fillString(k,3)
             if(fuck!=myIp){
                 send2Destination("fuck me",fuck, localPort)
