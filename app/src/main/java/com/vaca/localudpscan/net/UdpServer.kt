@@ -4,6 +4,7 @@ import android.util.Log
 import com.vaca.localudpscan.MainActivity
 import com.vaca.localudpscan.net.NetSetting.gate
 import com.vaca.localudpscan.net.NetSetting.myIp
+import com.vaca.localudpscan.net.NetSetting.targetIp
 import com.vaca.localudpscan.net.NetUtils.bytebuffer2ByteArray
 import com.vaca.localudpscan.net.NetUtils.fillString
 import kotlinx.coroutines.delay
@@ -21,6 +22,7 @@ object UdpServer {
     private fun initUdp() {
         try {
             channel = DatagramChannel.open();
+           // channel.configureBlocking(false)
             channel.socket().bind(InetSocketAddress(localPort));
         } catch (e: IOException) {
             e.printStackTrace();
@@ -38,7 +40,8 @@ object UdpServer {
                     bufR.clear()
                     val sourceAddress=channel.receive(bufR) as InetSocketAddress
                     val bytes=bytebuffer2ByteArray(bufR)
-                    Log.e("fuck","size  "+bytes.size)
+                    Log.e("fuck",String(bytes))
+                    NetSetting.targetIp=NetUtils.ip2String(sourceAddress.address)
                     //send2Destination(bytes, "192.168.6.102", 8888)
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -88,6 +91,15 @@ object UdpServer {
         }
     }
 
+    suspend fun fuckMe(){
+        for(k in 1..254){
+                send2Destination(k.toString(), myIp, localPort)
+        }
+    }
+
+    suspend fun sendToTarget(byteArray: ByteArray){
+        targetIp?.let { send2Destination(byteArray, it, localPort) }
+    }
 
 
     fun udpServerStart() {

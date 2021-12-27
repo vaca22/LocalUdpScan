@@ -5,4 +5,5 @@ object NetSetting {
     var gatep=1
     lateinit var gateX:String
     lateinit var myIp:String
+    var targetIp:String?=null
 }
